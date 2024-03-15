@@ -6,5 +6,14 @@
  * determine whether an Art piece is a Sculpture or not .
  */
 vector<Sculpture *> Sculpture::segregateSculptures(const vector<Art *> &collection) {
-    return vector<Sculpture *>{new Sculpture()};
+    vector<Sculpture *> sculptures;
+
+    for (Art *artPiece : collection) {
+        Sculpture *sculpturePtr = dynamic_cast<Sculpture *>(artPiece);
+        if (sculpturePtr != nullptr) {
+            sculptures.push_back(sculpturePtr);
+        }
+    }
+
+    return sculptures;
 }

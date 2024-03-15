@@ -15,7 +15,19 @@
  * Hint: Remember that if you want to override a method you must declare it first on the header file of the subclass.
  * */
 int Painting::appraise() {
-    return -1;
+    int basePrice = Painting::appraise(); // Call the superclass method to get the base price
+    
+    if (!isReplica) { // Check if it's not a replica
+        if (this->getArtist().getFameScore() > 8) {
+            return basePrice * 1.66; // Raise the price by 66%
+        } else if (this->getArtist().getFameScore()>= 5 && this->getArtist().getFameScore() <= 8) {
+            return basePrice * 1.37; // Raise the price by 37%
+        } else { // artistFameScore is less than 5
+            return basePrice * 1.15; // Raise the price by 15%
+        }
+    }
+    
+    return basePrice;
 }
 
 /* Exercise 3B
@@ -33,5 +45,15 @@ int Painting::appraise() {
  * Hint: Remember that if you want to override a method you must declare it first on the header file of the subclass.
  */
 int Sculpture::appraise() {
-    return -1;
+    int basePrice = Sculpture::appraise(); // Call the superclass method to get the base price
+    
+    if (material == Material::MARBLE && this->getArtist().getFameScore()  >= 5) {
+        return basePrice * 1.69; // Raise the price by 69%
+    } else if (material == Material::METAL && this->getArtist().getFameScore()  > 5) {
+        return basePrice * 1.45; // Raise the price by 45%
+    } else if (material != Material::PLASTIC && this->getArtist().getFameScore()  > 3) {
+        return basePrice * 1.12; // Raise the price by 12%
+    }
+    
+    return basePrice; // Return the same price for other cases
 }

@@ -5,6 +5,13 @@
  * pieces that are of the given Style.
  */
 vector<Art *> Art::filterCollectionByStyle(const vector<Art *> &personalCollection, Style selected) {
+    vector<Art *> filteredCollection;
 
-    return vector<Art *>{new Art()};
+    for (Art *artPiece : personalCollection) {
+        if (artPiece->getStyle().equals(selected)) {
+            filteredCollection.push_back(artPiece);
+        }
+    }
+
+    return filteredCollection;
 }
